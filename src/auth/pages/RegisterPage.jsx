@@ -10,11 +10,20 @@ const formData = {
   displayName: 'Axel Jimenez'
 }
 
+const formValidations = {
+  email: [ (value) => value.includes('@'), 'El correo debe de tener una @.'],
+  password: [(value) => value.length >= 6, 'El password debe de tener más de 6 letras.',],
+  displayName: [(value) => value.length >= 1, 'El nombre es obligatorio.']
+}
 
 
 export const RegisterPage = () => {
 
-  const { displayName, email, password, onInputChange, formState} = useForm(formData)
+  const { 
+    formState, displayName, email, password, onInputChange,
+    isFormValid, displayNameValid, emailValid, passwordValid
+    
+  } = useForm(formData, formValidations)
 
   const onSubmit = (event) => {
     event.preventDefault()
@@ -28,7 +37,7 @@ export const RegisterPage = () => {
       <Grid container>
 
         <Grid item xs={12} sx={{mt: 2}}>
-          <TextField label="Nombre Completo" type="text" placeholder='Nombre Completo' name="displayName" value={displayName} onChange={onInputChange} fullWidth/>
+          <TextField label="Nombre Completo" type="text" placeholder='Nombre Completo' name="displayName" value={displayName} onChange={onInputChange} fullWidth error/>
         </Grid>
 
         <Grid item xs={12} sx={{mt: 2}}>
