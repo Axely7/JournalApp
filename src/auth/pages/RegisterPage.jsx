@@ -1,13 +1,15 @@
 import {Link as RouterLink} from 'react-router-dom'
 import { Button, Grid, Link, TextField, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from '../../hooks'
+import { useDispatch } from 'react-redux'
+import { startCreatingUserWithEmailPassword } from '../../store/auth'
 
 const formData = {
-  email: 'axely7@hotmail.com',
-  password: '123456',
-  displayName: 'Axel Jimenez'
+  email: '',
+  password: '',
+  displayName: ''
 }
 
 const formValidations = {
@@ -19,6 +21,10 @@ const formValidations = {
 
 export const RegisterPage = () => {
 
+  const [formSubmitted, setFormSubmitted] = useState(false)
+
+  const dispatch = useDispatch();
+
   const { 
     formState, displayName, email, password, onInputChange,
     isFormValid, displayNameValid, emailValid, passwordValid
@@ -27,7 +33,11 @@ export const RegisterPage = () => {
 
   const onSubmit = (event) => {
     event.preventDefault()
-    console.log(formState)
+    setFormSubmitted(true)
+    if(!isFormValid) return;
+
+
+    dispatch(startCreatingUserWithEmailPassword(formState))
   }
 
 
@@ -37,15 +47,15 @@ export const RegisterPage = () => {
       <Grid container>
 
         <Grid item xs={12} sx={{mt: 2}}>
-          <TextField label="Nombre Completo" type="text" placeholder='Nombre Completo' name="displayName" value={displayName} onChange={onInputChange} fullWidth error/>
+          <TextField label="Nombre Completo" type="text" placeholder='Nombre Completo' name="displayName" value={displayName} onChange={onInputChange} fullWidth error={!!displayNameValid && formSubmitted} helperText={displayNameValid}/>
         </Grid>
 
         <Grid item xs={12} sx={{mt: 2}}>
-          <TextField label="Correo" type="email" placeholder='correo@google.com' name="email" value={email} onChange={onInputChange} fullWidth/>
+          <TextField label="Correo" type="email" placeholder='correo@google.com' name="email" value={email} onChange={onInputChange} fullWidth error={!!emailValid && formSubmitted} helperText={emailValid}/>
         </Grid> 
 
         <Grid item xs={12} sx={{mt: 2}}>
-          <TextField label="Contraseña" type="password" placeholder='Contraseña' name="password" value={password} onChange={onInputChange} fullWidth/>
+          <TextField label="Contraseña" type="password" placeholder='Contraseña' name="password" value={password} onChange={onInputChange} fullWidth error={!!passwordValid && formSubmitted} helperText={passwordValid}/>
         </Grid>
 
         <Grid container spacing={2} sx={{mb: 2, mt: 1}}>
