@@ -59,11 +59,11 @@ export const loginWithEmailPassword = async({email, password}) => {
     try {
         const result = await signInWithEmailAndPassword(FirebaseAuth, email, password)
 
-        const {displayName, email, photoURL, uid} = result.user
+        const {displayName, photoURL, uid} = result.user
 
         return {
             ok: true,
-            displayName, email, photoURL, uid
+            displayName, photoURL, uid
         }
         
     } catch (error) {
