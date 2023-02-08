@@ -5,15 +5,30 @@ import { getFirestore } from 'firebase/firestore/lite'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+console.log(import.meta.env)
+
 // Your web app's Firebase configuration
+// Dev/Prod
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAyd6N51rlRgLQkJM9uF5LziYprjlQRUVI",
+//   authDomain: "react-journal-f683a.firebaseapp.com",
+//   projectId: "react-journal-f683a",
+//   storageBucket: "react-journal-f683a.appspot.com",
+//   messagingSenderId: "649354846682",
+//   appId: "1:649354846682:web:433329e97095bd5e51a0e3"
+// };
+
+// Testing
 const firebaseConfig = {
-  apiKey: "AIzaSyAyd6N51rlRgLQkJM9uF5LziYprjlQRUVI",
-  authDomain: "react-journal-f683a.firebaseapp.com",
-  projectId: "react-journal-f683a",
-  storageBucket: "react-journal-f683a.appspot.com",
-  messagingSenderId: "649354846682",
-  appId: "1:649354846682:web:433329e97095bd5e51a0e3"
+  apiKey: "AIzaSyB7DcnY_X72hTcjVhISrhs_wUMDKDSYV88",
+  authDomain: "react-journal-testing-97e74.firebaseapp.com",
+  projectId: "react-journal-testing-97e74",
+  storageBucket: "react-journal-testing-97e74.appspot.com",
+  messagingSenderId: "536693256387",
+  appId: "1:536693256387:web:ddcebe41764127709eb276",
+  measurementId: "G-6Z8HHL4ZER"
 };
+
 
 // Initialize Firebase
 export const FirebaseApp  = initializeApp(firebaseConfig);
