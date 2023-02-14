@@ -28,6 +28,7 @@ export const LoginPage = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    console.log({email, password})
     // Disparando thunk
     dispatch(startLoginWithEmailPassword({email, password}))
     console.log({email, password})
@@ -40,14 +41,16 @@ export const LoginPage = () => {
 
   return (
    <AuthLayout title='Login'>
-    <form className='animate__animated animate__fadeIn animate__faster' onSubmit={onSubmit}>
+    <form className='animate__animated animate__fadeIn animate__faster' aria-label='submit-form' onSubmit={onSubmit}>
       <Grid container>
         <Grid item xs={12} sx={{mt: 2}}>
           <TextField label="Correo" type="email" placeholder='correo@google.com' fullWidth name='email' value={email} onChange={onInputChange}/>
         </Grid>
 
         <Grid item xs={12} sx={{mt: 2}}>
-          <TextField label="Contraseña" type="password" placeholder='Contraseña' fullWidth name='password' value={password} onChange={onInputChange}/>
+          <TextField label="Contraseña" type="password" placeholder='Contraseña' inputProps={{
+            'data-testid': 'password'
+          }} fullWidth name='password' value={password} onChange={onInputChange}/>
         </Grid>
 
         <Grid container sx={{mt: 1}} display={!!errorMessage ? '' : 'none'}>
